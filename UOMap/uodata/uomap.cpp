@@ -130,7 +130,7 @@ auto uomap_t::loadTerrainMul(const std::filesystem::path &path) ->bool {
 auto uomap_t::loadTerrainUOP(const std::filesystem::path &path) ->bool {
 	auto hash = this->format("build/map%ilegacymul/%s", mapnumber,"%.8u.dat");
 	return loadUOP(path.string(), 0x300, hash);
-
+	
 }
 
 //=================================================================================
@@ -231,27 +231,29 @@ auto uomap_t::applyArtDiff(const std::string &difflpath, const std::string &diff
 		
 		while (diffl.good() && !diffl.eof()){
 			diffl.read(reinterpret_cast<char*>(&block),4);
-			if (block >= artdata.size()) {
-				rvalue = false ;
-				break;
-			}
-			diffi.read(reinterpret_cast<char*>(&index),4);
-			diffi.read(reinterpret_cast<char*>(&length),4);
-			diffi.read(reinterpret_cast<char*>(&extra),4);
-			if (diffi.gcount() != 4){
-				rvalue = false ;
-				break;
-			}
-			if ((index >= 0xFFFFFFFE ) || (length == 0) || (length >= 0xFFFFFFFF)) {
-				artdata[block].clear() ;
-			}
-			else {
-				artdata[block].raw().resize(length,0);
-				diff.seekg(index,std::ios::beg);
-				diff.read(reinterpret_cast<char*>(artdata[block].raw().data()),length);
-				if (diff.gcount()!= length){
+			if (diffl.gcount() ==4) {
+				if (block >= artdata.size()) {
 					rvalue = false ;
 					break;
+				}
+				diffi.read(reinterpret_cast<char*>(&index),4);
+				diffi.read(reinterpret_cast<char*>(&length),4);
+				diffi.read(reinterpret_cast<char*>(&extra),4);
+				if (diffi.gcount() != 4){
+					rvalue = false ;
+					break;
+				}
+				if ((index >= 0xFFFFFFFE ) || (length == 0) || (length >= 0xFFFFFFFF)) {
+					artdata[block].clear() ;
+				}
+				else {
+					artdata[block].raw().resize(length,0);
+					diff.seekg(index,std::ios::beg);
+					diff.read(reinterpret_cast<char*>(artdata[block].raw().data()),length);
+					if (diff.gcount()!= length){
+						rvalue = false ;
+						break;
+					}
 				}
 			}
 		}
@@ -306,7 +308,7 @@ auto uomap_t::terrain(int x, int y, std::uint16_t tileid, std::int8_t altitude) 
 		terraindata[block].terrain(xoff, yoff,tileid,altitude);
 	}
 	throw std::out_of_range(strutil::format("Invalid loc(%i,%i), map size %i,%i",x,y,width,height));
-
+	
 }
 
 //=================================================================================
@@ -316,7 +318,7 @@ auto uomap_t::art(int x, int y) const ->std::vector<std::tuple<std::uint16_t,std
 		return artdata[block].art(xoff,yoff) ;
 	}
 	throw std::out_of_range(strutil::format("Invalid loc(%i,%i), map size %i,%i",x,y,width,height));
-
+	
 }
 //=================================================================================
 auto uomap_t::art(int x, int y, std::uint16_t tileid, std::int8_t altitude, std::uint16_t hue)  ->void {
@@ -325,7 +327,7 @@ auto uomap_t::art(int x, int y, std::uint16_t tileid, std::int8_t altitude, std:
 		artdata[block].art(xoff,yoff,tileid,altitude,hue) ;
 	}
 	throw std::out_of_range(strutil::format("Invalid loc(%i,%i), map size %i,%i",x,y,width,height));
-
+	
 }
 //=================================================================================
 auto uomap_t::art(int x, int y,int z) const ->std::vector<std::tuple<std::uint16_t,std::int8_t,std::uint16_t>> {
@@ -334,23 +336,23 @@ auto uomap_t::art(int x, int y,int z) const ->std::vector<std::tuple<std::uint16
 		return artdata[block].art(xoff,yoff,z) ;
 	}
 	throw std::out_of_range(strutil::format("Invalid loc(%i,%i), map size %i,%i",x,y,width,height));
-
+	
 }
 //=================================================================================
 auto uomap_t::remove(int x, int y) ->void {
 	
 	auto [block,xoff,yoff] = calcBlockOffset(x, y);
 	if (block < artdata.size()){
-		 artdata[block].remove(xoff,yoff) ;
+		artdata[block].remove(xoff,yoff) ;
 	}
 	throw std::out_of_range(strutil::format("Invalid loc(%i,%i), map size %i,%i",x,y,width,height));
-
+	
 }
 //=================================================================================
 auto uomap_t::remove(int x, int y, int z) ->void {
 	auto [block,xoff,yoff] = calcBlockOffset(x, y);
 	if (block < artdata.size()){
-		 artdata[block].remove(xoff,yoff,z) ;
+		artdata[block].remove(xoff,yoff,z) ;
 	}
 	throw std::out_of_range(strutil::format("Invalid loc(%i,%i), map size %i,%i",x,y,width,height));
 }
