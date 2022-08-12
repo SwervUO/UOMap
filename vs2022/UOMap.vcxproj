@@ -22,11 +22,18 @@
     <ClInclude Include="..\UOMap\uodata\uomap.hpp" />
     <ClInclude Include="..\UOMap\uodata\uopfile.hpp" />
     <ClInclude Include="..\UOMap\utility\strutil.hpp" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\zlib\vs2022\zlib.vcxproj">
       <Project>{7ddbf2dc-f199-4f38-b56d-c75270c3922d}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="UOMap.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\asset\wf.ico" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
