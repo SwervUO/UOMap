@@ -131,7 +131,10 @@
 #include <memory>
 #include <cstdio>
 
-#include <zlib.h>
+// This is modified, in that we are only using it for a map
+// Which is not compressed, so we can simplify and
+// not include zlib
+//#include <zlib.h>
 
 //===========================================================
 // uopindex_t
@@ -197,9 +200,11 @@ private:
 	std::vector<std::uint64_t> _hash2 ;
 	
 	/****************** zlib compression wrappers *********************/
+// Modified version, no zlib
+	/*
 	auto zcompress(const std::vector<std::uint8_t> &data) const ->std::vector<unsigned char>;
 	auto zdecompress(const std::vector<std::uint8_t> &source, std::size_t decompressed_size) const ->std::vector<unsigned char>;
-	
+	*/
 	
 	
 	

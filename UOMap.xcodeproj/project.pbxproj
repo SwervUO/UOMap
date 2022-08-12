@@ -9,10 +9,9 @@
 /* Begin PBXBuildFile section */
 		646FAC2D28A5442700DCEE5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 646FAC2C28A5442700DCEE5E /* main.cpp */; };
 		646FAC3C28A544C500DCEE5E /* mapblock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 646FAC3628A544C500DCEE5E /* mapblock.cpp */; };
-		646FAC3D28A544C500DCEE5E /* uopfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 646FAC3828A544C500DCEE5E /* uopfile.cpp */; };
 		646FAC4F28A544E200DCEE5E /* strutil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 646FAC4728A544E200DCEE5E /* strutil.cpp */; };
-		646FAC5328A5526000DCEE5E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 646FAC5228A5525A00DCEE5E /* libz.tbd */; };
 		646FAC5628A55AF200DCEE5E /* uomap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 646FAC5528A55AF200DCEE5E /* uomap.cpp */; };
+		646FAC7E28A66D8E00DCEE5E /* uopfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 646FAC7C28A66D8E00DCEE5E /* uopfile.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,14 +31,14 @@
 		646FAC2C28A5442700DCEE5E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		646FAC3328A5445200DCEE5E /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		646FAC3628A544C500DCEE5E /* mapblock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mapblock.cpp; sourceTree = "<group>"; };
-		646FAC3828A544C500DCEE5E /* uopfile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = uopfile.cpp; sourceTree = "<group>"; };
-		646FAC3928A544C500DCEE5E /* uopfile.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = uopfile.hpp; sourceTree = "<group>"; };
 		646FAC3B28A544C500DCEE5E /* mapblock.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mapblock.hpp; sourceTree = "<group>"; };
 		646FAC4528A544E200DCEE5E /* strutil.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = strutil.hpp; sourceTree = "<group>"; };
 		646FAC4728A544E200DCEE5E /* strutil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = strutil.cpp; sourceTree = "<group>"; };
 		646FAC5228A5525A00DCEE5E /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		646FAC5428A55AF200DCEE5E /* uomap.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = uomap.hpp; sourceTree = "<group>"; };
 		646FAC5528A55AF200DCEE5E /* uomap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = uomap.cpp; sourceTree = "<group>"; };
+		646FAC7C28A66D8E00DCEE5E /* uopfile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = uopfile.cpp; sourceTree = "<group>"; };
+		646FAC7D28A66D8E00DCEE5E /* uopfile.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = uopfile.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,7 +46,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				646FAC5328A5526000DCEE5E /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,8 +94,8 @@
 			children = (
 				646FAC3628A544C500DCEE5E /* mapblock.cpp */,
 				646FAC3B28A544C500DCEE5E /* mapblock.hpp */,
-				646FAC3828A544C500DCEE5E /* uopfile.cpp */,
-				646FAC3928A544C500DCEE5E /* uopfile.hpp */,
+				646FAC7C28A66D8E00DCEE5E /* uopfile.cpp */,
+				646FAC7D28A66D8E00DCEE5E /* uopfile.hpp */,
 				646FAC5528A55AF200DCEE5E /* uomap.cpp */,
 				646FAC5428A55AF200DCEE5E /* uomap.hpp */,
 			);
@@ -171,9 +169,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				646FAC3C28A544C500DCEE5E /* mapblock.cpp in Sources */,
+				646FAC7E28A66D8E00DCEE5E /* uopfile.cpp in Sources */,
 				646FAC5628A55AF200DCEE5E /* uomap.cpp in Sources */,
 				646FAC2D28A5442700DCEE5E /* main.cpp in Sources */,
-				646FAC3D28A544C500DCEE5E /* uopfile.cpp in Sources */,
 				646FAC4F28A544E200DCEE5E /* strutil.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

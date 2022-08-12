@@ -206,8 +206,11 @@ auto	uopfile::table_entry::save(std::ostream &output) ->uopfile::table_entry & {
 /************************************************************************
  zlib wrappers for compression
  ***********************************************************************/
+// Modified version doesn't compress
+/*
 //=============================================================================
 auto uopfile::zdecompress(const std::vector<uint8_t> &source, std::size_t decompressed_size) const ->std::vector<uint8_t>{
+	
 	// uLongf is from zlib.h
 	auto srcsize = static_cast<uLongf>(source.size()) ;
 	auto destsize = static_cast<uLongf>(decompressed_size);
@@ -233,7 +236,7 @@ auto uopfile::zcompress(const std::vector<uint8_t> &source) const ->std::vector<
 	rdata.resize(size) ;
 	return rdata;
 }
-
+*/
 
 //=============================================================================
 auto uopfile::isUOP(const std::string &filepath) const ->bool {
@@ -314,7 +317,9 @@ auto uopfile::loadUOP(const std::string &filepath, std::size_t max_hashindex , c
 			std::vector<std::uint8_t> uopdata(size,0);
 			input.read(reinterpret_cast<char*>(uopdata.data()),size);
 			if (entry.compression == 1){
-				uopdata = zdecompress(uopdata, entry.decompressed_length);
+				// Modified, should never be compressing with this uopfile version
+				throw std::runtime_error("Compression called, should never happen");
+				//uopdata = zdecompress(uopdata, entry.decompressed_length);
 			}
 			
 			// First see if we should even do anything with this hash
@@ -398,10 +403,11 @@ auto uopfile::writeUOP(const std::string &filepath) ->bool {
 			unsigned int sizeDecompressed = static_cast<unsigned int>(rawdata.size()) ;
 			unsigned int sizeOut = sizeDecompressed ;
 			if ((compress != 0) && (sizeDecompressed>0)){
-				
-				auto dataout = this->zcompress(rawdata) ;
-				sizeOut = static_cast<unsigned int>(dataout.size()) ;
-				rawdata = dataout ;
+				// Modified version, we should never be compressing
+				throw std::runtime_error("Should never be compressing in this version ");
+				//auto dataout = this->zcompress(rawdata) ;
+				//sizeOut = static_cast<unsigned int>(dataout.size()) ;
+				//rawdata = dataout ;
 			}
 			tables[data_entry].offset = output.tellp() ;
 			tables[data_entry].compression = compress ;

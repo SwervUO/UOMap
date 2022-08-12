@@ -25,11 +25,6 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\zlib\vs2022\zlib.vcxproj">
-      <Project>{7ddbf2dc-f199-4f38-b56d-c75270c3922d}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="UOMap.rc" />
   </ItemGroup>
   <ItemGroup>
@@ -39,7 +34,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{1f60c2fb-ca98-4c9b-999b-01af8712f170}</ProjectGuid>
-    <RootNamespace>MapAdjustor</RootNamespace>
+    <RootNamespace>UOMap</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -76,7 +71,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc11</LanguageStandard_C>
-      <AdditionalIncludeDirectories>..\UOMap;..\UOMap\uodata;..\UOMap\utility;..\zlib</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\UOMap;..\UOMap\uodata;..\UOMap\utility</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -94,7 +89,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc11</LanguageStandard_C>
-      <AdditionalIncludeDirectories>..\UOMap;..\UOMap\uodata;..\UOMap\utility;..\zlib</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\UOMap;..\UOMap\uodata;..\UOMap\utility</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
