@@ -39,6 +39,9 @@
 		646FAC5528A55AF200DCEE5E /* uomap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = uomap.cpp; sourceTree = "<group>"; };
 		646FAC7C28A66D8E00DCEE5E /* uopfile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = uopfile.cpp; sourceTree = "<group>"; };
 		646FAC7D28A66D8E00DCEE5E /* uopfile.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = uopfile.hpp; sourceTree = "<group>"; };
+		64771EE928A925DD00182BB6 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		64771EEA28A926AF00182BB6 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		64771EEB28A9271200182BB6 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +79,7 @@
 				646FAC3528A5446C00DCEE5E /* uodata */,
 				646FAC3428A5446400DCEE5E /* utility */,
 				646FAC2C28A5442700DCEE5E /* main.cpp */,
+				64771EEB28A9271200182BB6 /* CMakeLists.txt */,
 			);
 			path = UOMap;
 			sourceTree = "<group>";
@@ -85,6 +89,7 @@
 			children = (
 				646FAC4728A544E200DCEE5E /* strutil.cpp */,
 				646FAC4528A544E200DCEE5E /* strutil.hpp */,
+				64771EE928A925DD00182BB6 /* CMakeLists.txt */,
 			);
 			path = utility;
 			sourceTree = "<group>";
@@ -98,6 +103,7 @@
 				646FAC7D28A66D8E00DCEE5E /* uopfile.hpp */,
 				646FAC5528A55AF200DCEE5E /* uomap.cpp */,
 				646FAC5428A55AF200DCEE5E /* uomap.hpp */,
+				64771EEA28A926AF00182BB6 /* CMakeLists.txt */,
 			);
 			path = uodata;
 			sourceTree = "<group>";
