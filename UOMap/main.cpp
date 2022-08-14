@@ -559,8 +559,8 @@ auto processExtract(const std::vector<std::string> &args) ->std::string {
 					if ((endy >=0) && (endy <height) && (starty <= endy)){
 						auto output = std::ofstream(path) ;
 						if (output.is_open()){
-							for (auto y = starty ; y < endy; ++y){
-								for (auto x = startx ; x < endx; ++x){
+							for (auto y = starty ; y <= endy; ++y){
+								for (auto x = startx ; x <= endx; ++x){
 									auto ter = uomap.terrain(x, y) ;
 									output << "add terrain," <<x <<"," <<y <<","<< strutil::ntos(std::get<0>(ter),strutil::radix_t::hex,true,4) <<","<<static_cast<int>(std::get<1>(ter)) << std::endl;
 									auto tiles = uomap.art(x,y) ;
