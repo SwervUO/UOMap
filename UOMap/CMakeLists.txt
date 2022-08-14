@@ -21,9 +21,7 @@ add_subdirectory(utility)
 
 add_executable(UOMap
 	main.cpp
-if (WIN32)
-	..\vs2022\UOMap.rc
-endif()
+
 )
 
 target_link_libraries(UOMap
