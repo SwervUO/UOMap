@@ -65,7 +65,7 @@ public:
 	static auto maxmap() ->size_t {return mapsizes.size();}
 	uomap_t(int mapnum=0, int width=0, int height = 0);
 	auto setSize(int width, int height) ->void ;
-	
+	auto size() const ->std::pair<int,int> {return std::make_pair(width, height);}
 
 	auto loadTerrainMul(const std::filesystem::path &path) ->bool ;
 	auto loadTerrainUOP(const std::filesystem::path &path) ->bool ;

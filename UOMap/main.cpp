@@ -25,6 +25,7 @@ const std::string mul = "mul"s ;
 const std::string uop = "uop"s ;
 const std::string terrain = "terrain"s ;
 const std::string art = "art"s ;
+const std::string all = "all"s ;
 
 static uomap_t uomap = uomap_t();
 
@@ -39,34 +40,39 @@ auto processRemove(const std::vector<std::string> &args) ->std::string ;
 auto processAdd(const std::vector<std::string> &args) ->std::string ;
 auto processProcess(const std::vector<std::string> &args) ->std::string ;
 auto processMessage(const std::vector<std::string> &args) ->std::string ;
+auto processExtract(const std::vector<std::string> &args) ->std::string ;
 
 /*
  Commands are:
- 	init $mapnum,$width,$height				// width or height == 0, default mapsize will be used for the mapnum
+ 	init $mapnum,$width,$height								// width or height == 0, default mapsize will be used for the mapnum
  
-    load terrain,uop or mul,$filepath		// Load the terrain file at filepath
-    load art,$idxpath,$mulpath				// Load the art specified by the paths
+    load terrain,uop or mul,$filepath						// Load the terrain file at filepath
+    load art,$idxpath,$mulpath								// Load the art specified by the paths
  
-    diff terrain,$diflpath,$difpath			// Apply the diff
-	diff art,$diflpath,$difipath,$difpath	// Apply the diff
+    diff terrain,$diflpath,$difpath							// Apply the diff
+	diff art,$diflpath,$difipath,$difpath					// Apply the diff
  
- 	save terrain,uop or mul,$filepath		// save the terrain in the specified format
-    save art,$idxpath,$mulpath				// save the art at the secified paths
+ 	save terrain,uop or mul,$filepath						// save the terrain in the specified format
+    save art,$idxpath,$mulpath								// save the art at the secified paths
  
- 	query terrain,$x,$y,$path				// Provide the terrain info to the file, if no path, it is provided to the std::cout
- 	query art,$x,$y,$path					// Provide the art info to the file, if no path, it is provided to the std::cout
- 	query art,$x,$y,$z,$path				// Provide the art info to the file, if no path, it is provided to the std::cout
+ 	query terrain,$x,$y,$path								// Provide the terrain info to the file, if no path, it is provided to the std::cout
+ 	query art,$x,$y,$path									// Provide the art info to the file, if no path, it is provided to the std::cout
+ 	query art,$x,$y,$z,$path								// Provide the art info to the file, if no path, it is provided to the std::cout
  
- 	remove $x,$y							// remove all art at the x,y
- 	remove $x,$y,$z							// remove all art at the x,y,z
+ 	remove $x,$y											// remove all art at the x,y
+ 	remove $x,$y,$z											// remove all art at the x,y,z
  
- 	add terrain,$x,$y,$tileid,$altitude		// add terrain to the x,y
- 	add art,$x,$y,$tileid,&altitude,$hue	// add art to the x,y
- 	add $x,$y,$path							// add all art in the file specified
+ 	add terrain,$x,$y,$tileid,$altitude						// add terrain to the x,y
+ 	add art,$x,$y,$tileid,&altitude,$hue					// add art to the x,y
+ 	add $x,$y,$path											// add all art in the file specified
  
- 	process $path							// process the commands at the path specified
- 	msg $message							// output the text string to std::cout
- 	quit									// quit the processing stream
+ 	extract art,$startx,$starty,$endx,$endy,$filepath		// Provide the art info to the file
+ 	extract terrain,$startx,$starty,$endx,$endy,$filepath	// Provide the terrain info to the file
+ 	extract all,$startx,$starty,$endx,$endy,$filepath		// Provide terrain and art info to the file
+
+ 	process $path											// process the commands at the path specified
+ 	msg $message											// output the text string to std::cout
+ 	quit													// quit the processing stream
  
  */
 
@@ -151,6 +157,9 @@ auto processStream(std::istream &input, bool should_prompt )->void {
 				}
 				else if (command == "add"){
 					status = processAdd(arg);
+				}
+				else if (command == "extract"){
+					status = processExtract(arg);
 				}
 				else if (command == "process"){
 					status = processProcess(arg);
@@ -529,5 +538,66 @@ auto processProcess(const std::vector<std::string> &args) ->std::string {
 auto processMessage(const std::vector<std::string> &args) ->std::string {
 	auto status = std::string() ;
 	std::cout << flatten(args) << std::endl;
+	return status ;
+}
+//extract art,$startx,$starty,$endx,$endy,$filepath		// Provide the art info to the file
+
+//===============================================================
+auto processExtract(const std::vector<std::string> &args) ->std::string {
+	auto status = std::string() ;
+	if (args.size() >=6){
+		auto type = strutil::lower(args[0]) ;
+		auto startx = strutil::ston<int>(args[1]) ;
+		auto starty = strutil::ston<int>(args[2]) ;
+		auto endx = strutil::ston<int>(args[3]) ;
+		auto endy = strutil::ston<int>(args[4]) ;
+		auto path = args[5] ;
+		auto [width,height] = uomap.size() ;
+		if ((startx >=0) && (startx <width)){
+			if ((starty >=0) && (starty <height)){
+				if ((endx >=0) && (endx <width) && (startx <= endx)){
+					if ((endy >=0) && (endy <height) && (starty <= endy)){
+						auto output = std::ofstream(path) ;
+						if (output.is_open()){
+							for (auto y = starty ; y < endy; ++y){
+								for (auto x = startx ; x < endx; ++x){
+									auto ter = uomap.terrain(x, y) ;
+									output << "add terrain," <<x <<"," <<y <<","<< strutil::ntos(std::get<0>(ter),strutil::radix_t::hex,true,4) <<","<<static_cast<int>(std::get<1>(ter)) << std::endl;
+									auto tiles = uomap.art(x,y) ;
+									for (auto &cell:tiles){
+										auto tileid = std::get<0>(cell);
+										auto alt = std::get<1>(cell) ;
+										auto hue = std::get<2>(cell) ;
+										std::cout <<"add art,"<<x<<","<<y<<"," <<strutil::ntos(tileid,strutil::radix_t::hex,true,4)<<","<<static_cast<int>(alt)<<"," <<strutil::ntos(hue,strutil::radix_t::hex,true,4)<<std::endl;
+									}
+								}
+							}
+						}
+						else {
+							status = "Unable for extract to open: "s + path ;
+						}
+					}
+					else {
+						status = "Invalid endy for extract" ;
+					}
+
+				}
+				else {
+					status = "Invalid endx for extract" ;
+				}
+
+			}
+			else {
+				status = "Invalid starty for extract" ;
+			}
+
+		}
+		else {
+			status = "Invalid startx for extract" ;
+		}
+	}
+	else {
+		status = "Invalid extract command, missing parameters";
+	}
 	return status ;
 }
