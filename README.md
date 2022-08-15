@@ -18,11 +18,11 @@ command script file you wish to execute).
   //  --- a comment indicator, everthing after this on a line is ignored.
   
  init $mapnum,$width,$height	                               // width or height == 0, default mapsize will be 
-                                                               // used for the mapnum
+                                                               // used for the mapnum. Should always be the first thing
  
- load terrain,uop or mul,$filepath                             // Load the terrain file at filepath
+ load terrain,uop or mul,$filepath                             // Load the terrain file at filepath (make sure you init first)
  
- load art,$idxpath,$mulpath                                    // Load the art specified by the paths
+ load art,$idxpath,$mulpath                                    // Load the art specified by the paths (make sure you init first)
  
  diff terrain,$diflpath,$difpath                               // Apply the diff
  
