@@ -21,12 +21,15 @@ command script file you wish to execute).
                                                                // used for the mapnum
  
  load terrain,uop or mul,$filepath                             // Load the terrain file at filepath
+ 
  load art,$idxpath,$mulpath                                    // Load the art specified by the paths
  
  diff terrain,$diflpath,$difpath                               // Apply the diff
+ 
  diff art,$diflpath,$difipath,$difpath                         // Apply the diff
  
  save terrain,uop or mul,$filepath                             // save the terrain in the specified format
+ 
  save art,$idxpath,$mulpath                                    // save the art at the secified paths
  
  query terrain,$x,$y,$path                                     // Provide the terrain info to the file, if no path, 
@@ -49,10 +52,15 @@ command script file you wish to execute).
  add $x,$y,$path                                               // add all art in the file specified
  
  extract art,$startx,$starty,$endx,$endy,$filepath             // Provide the art info to the file
+ 
  extract terrain,$startx,$starty,$endx,$endy,$filepath         // Provide the terrain info to the file
+ 
  extract all,$startx,$starty,$endx,$endy,$filepath             // Provide terrain and art info to the file
 
  process $path                                                 // process the commands at the path specified
+ 
  msg $message                                                  // output the text string to std::cout 
                                                                // (usful for markers in large scripts)
+							       
  quit                                                          // quit the processing stream
+ 
