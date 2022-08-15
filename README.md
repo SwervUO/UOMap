@@ -45,10 +45,13 @@ command script file you wish to execute).
                                                                // it is provided to the std::cout
  
  remove $x,$y                                                  // remove all art at the x,y
+ 
  remove $x,$y,$z                                               // remove all art at the x,y,z
  
  add terrain,$x,$y,$tileid,$altitude                           // add terrain to the x,y
+ 
  add art,$x,$y,$tileid,&altitude,$hue                          // add art to the x,y
+ 
  add $x,$y,$path                                               // add all art in the file specified
  
  extract art,$startx,$starty,$endx,$endy,$filepath             // Provide the art info to the file
